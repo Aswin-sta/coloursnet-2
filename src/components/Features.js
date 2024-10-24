@@ -2,7 +2,6 @@ import * as React from "react";
 import { useSpring, animated } from "react-spring"; // Import react-spring
 import Grid from "@mui/material/Grid2";
 import Box from "@mui/material/Box";
-import colors from "../assets/colors";
 import { Typography, useMediaQuery } from "@mui/material";
 import assets from "../assets/images";
 import { useInView } from "react-intersection-observer";
@@ -78,8 +77,9 @@ export default function Features() {
     <animated.div style={smoothAnimation} ref={ref}>
       <Box
         sx={{
-          paddingBlock: { xs: 2, sm: 3, md: 4 },
           paddingInline: { xs: 2, sm: 4, md: 10, lg: 16 },
+          marginTop: 2,
+          marginBottom: { xs: 4, md: 8 },
         }}
       >
         <Typography
@@ -88,7 +88,6 @@ export default function Features() {
           align="left"
           gutterBottom
           sx={{
-            fontWeight: 500,
             mb: { xs: 4, sm: 5, md: 6 }, // Reduced margin
             mt: { xs: 4, sm: 5, md: 6 }, // Reduced margin
             fontSize: {
@@ -97,7 +96,7 @@ export default function Features() {
               md: "2.5em", // Medium screens
               lg: "3em", // Large screens
             },
-            fontFamily: "'Gestura', serif",
+
             lineHeight: "1.1em",
           }}
         >
@@ -106,7 +105,8 @@ export default function Features() {
         <Grid
           container
           sx={{
-            border: `1px solid ${colors.borderColor}`,
+            border: (theme) =>
+              `1px solid ${(theme.vars || theme).palette.divider}`,
             borderRadius: { xs: "20px", sm: "30px", md: "50px", lg: "70px" },
             overflow: "hidden",
           }}
@@ -126,7 +126,8 @@ export default function Features() {
                   onClick={() => handleServiceClick(service)}
                   sx={(theme) => ({
                     cursor: "pointer",
-                    borderBottom: `1px solid ${colors.borderColor}`,
+                    borderBottom: (theme) =>
+                      `1px solid ${(theme.vars || theme).palette.divider}`,
                     "&:last-child": {
                       borderBottom: "none",
                     },
@@ -134,12 +135,16 @@ export default function Features() {
                       selectedService.id === service.id
                         ? "action.selected"
                         : "transparent",
-                    "&:hover": {
-                      backgroundColor: (theme.vars || theme).palette.action
-                        .hover,
-                      transform: "scale(1.02)", // Scale effect on hover
-                      boxShadow: `0 4px 20px rgba(0, 0, 0, 0.1)`,
-                    },
+                    ...(isSmallScreen
+                      ? {}
+                      : {
+                          "&:hover": {
+                            backgroundColor: (theme.vars || theme).palette
+                              .action.hover,
+                            transform: "scale(1.02)",
+                            boxShadow: `0 4px 20px rgba(0, 0, 0, 0.1)`,
+                          },
+                        }),
                     paddingInline: { xs: 2, sm: 4, md: 6 },
                     paddingBlock: { xs: 2, sm: 3, md: 4 },
                     transition:
@@ -157,7 +162,7 @@ export default function Features() {
                         md: "1.5em", // Medium screens
                         lg: "1.8em", // Large screens
                       },
-                      fontFamily: "'Gestura', serif",
+
                       lineHeight: "1em",
                       textAlign: "left",
                     }}
@@ -176,7 +181,6 @@ export default function Features() {
                     <Typography
                       variant="body1"
                       sx={{
-                        fontFamily: "'RoobertPRO', sans-serif",
                         mb: { xs: 1, sm: 2, md: 3 }, // Reduced margin
                         fontSize: { xs: "0.75em", sm: "0.85em", md: "0.95em" }, // Reduced font size
                         fontWeight: 400,
@@ -201,12 +205,8 @@ export default function Features() {
                           aspectRatio: 1 / 1,
                           display: "flex",
                           mb: 2,
-                          padding: 4,
+                          padding: 3,
                           height: "auto",
-                          transition: "transform 0.8s ease-in-out", // Smoother image animation
-                          "&:hover": {
-                            transform: "scale(1.05)",
-                          },
                         }}
                       >
                         <Box
@@ -241,7 +241,9 @@ export default function Features() {
               display: { xs: "none", md: "flex" },
               justifyContent: "center",
               alignItems: "center",
-              borderLeft: `1px solid ${colors.borderColor}`,
+              padding: 4,
+              borderLeft: (theme) =>
+                `1px solid ${(theme.vars || theme).palette.divider}`,
             }}
           >
             <Box
@@ -253,12 +255,8 @@ export default function Features() {
                   lg: "70px",
                 },
                 overflow: "hidden",
-                width: "80%",
+                width: "90%",
                 height: "auto",
-                transition: "transform 0.8s ease-in-out", // Smoother animation on large screen
-                "&:hover": {
-                  transform: "scale(1.05)", // Scale effect on hover
-                },
               }}
             >
               <animated.img

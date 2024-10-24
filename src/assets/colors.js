@@ -1,9 +1,8 @@
 const colors = {
-  background: "rgb(253, 251, 244)",
-  borderColor: "rgba(0, 74, 51, 0.15)",
-  primaryColor: "#3A5CB5",
-  primaryFont: "rgb(0, 46, 82)",
-  secondaryColor: "#f6f3e7",
+  primary: "#10375C",
+  secondary: "#024CAA",
+  highlight: "#EC8305",
+  neutral: "#DBD3D3",
 };
 
 export default colors;

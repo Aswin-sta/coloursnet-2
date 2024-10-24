@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "react-spring";
 import assets from "../assets/images";
+import colors from "../assets/colors";
 
 const LogoCollection = () => {
   const brandLogos = [
@@ -19,10 +20,9 @@ const LogoCollection = () => {
     assets.images.HoneywellLogo,
     assets.images.KantechLogo,
     assets.images.SamsungLogo,
-    assets.images.SonosLogo,
   ];
 
-  const logosToDisplay = brandLogos; // Use all logos for both light and dark modes
+  const logosToDisplay = brandLogos;
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -42,13 +42,14 @@ const LogoCollection = () => {
   });
 
   return (
-    <animated.div style={smoothAnimation} ref={ref}>
-      <Box
-        sx={{
-          paddingBlock: { xs: 2, sm: 3, md: 4 },
-          paddingInline: { xs: 2, sm: 4, md: 10, lg: 16 },
-        }}
-      >
+    <Box
+      sx={{
+        paddingBlock: { xs: 2, sm: 3, md: 4 },
+        paddingInline: { xs: 2, sm: 4, md: 10, lg: 16 },
+        backgroundColor: colors.secondary,
+      }}
+    >
+      <animated.div style={smoothAnimation} ref={ref}>
         <Typography
           variant="h2"
           component="h2"
@@ -64,7 +65,7 @@ const LogoCollection = () => {
               md: "3.2em",
               lg: "4em",
             },
-            color: "primary.main",
+            color: "white",
             lineHeight: "1.1em",
           }}
         >
@@ -86,9 +87,9 @@ const LogoCollection = () => {
                 src={logo}
                 alt={`Brand logo ${index + 1}`}
                 sx={{
-                  width: { xs: "85px", md: "140px" },
+                  width: { xs: "110px", md: "180px" },
                   height: "auto",
-                  filter: "grayscale(100%) brightness(3)",
+                  filter: "grayscale(100%) brightness(20)",
                   objectFit: "contain",
                   margin: "0 auto",
                   padding: "20px",
@@ -97,8 +98,8 @@ const LogoCollection = () => {
             </Grid>
           ))}
         </Grid>
-      </Box>
-    </animated.div>
+      </animated.div>
+    </Box>
   );
 };
 

@@ -13,6 +13,7 @@ import honeywellLogo from "./honeywell-logo.png";
 import kantechLogo from "./kantech-logo.png";
 import samsungLogo from "./samsung-logo.png";
 import sonosLogo from "./sonos-logo.png";
+import flag from "./flag.png";
 
 const assets = {
   images: {
@@ -31,6 +32,7 @@ const assets = {
     KantechLogo: kantechLogo,
     SamsungLogo: samsungLogo,
     SonosLogo: sonosLogo,
+    flag: flag,
   },
 };
 

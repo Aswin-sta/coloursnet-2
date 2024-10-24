@@ -11,6 +11,7 @@ import Testimonials from "../components/Testimonials";
 import FAQ from "../components/FAQ";
 import Footer from "../components/Footer";
 import AppTheme from "../shared-theme/AppTheme";
+import ConnectWithus from "../components/ConnectWithus";
 
 export default function MarketingPage(props) {
   return (
@@ -20,13 +21,12 @@ export default function MarketingPage(props) {
       <Hero />
       <div>
         <Features />
-        <LogoCollection />
-        <Divider />
-        <Divider />
         <Highlights />
+        <LogoCollection />
         <Divider />
         <FAQ />
         <Divider />
+        <ConnectWithus />
         <Footer />
       </div>
     </AppTheme>

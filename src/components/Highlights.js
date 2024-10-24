@@ -1,7 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -11,6 +9,9 @@ import DevicesIcon from "@mui/icons-material/Devices";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import SecurityIcon from "@mui/icons-material/Security";
 import BuildIcon from "@mui/icons-material/Build";
+import colors from "../assets/colors";
+import { useInView } from "react-intersection-observer";
+import { useSpring, animated } from "react-spring";
 
 const items = [
   {
@@ -51,57 +52,97 @@ const items = [
 ];
 
 export default function Highlights() {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const smoothAnimation = useSpring({
+    from: { opacity: 0, transform: "translateY(50px)" },
+    to: inView
+      ? { opacity: 1, transform: "translateY(0)" }
+      : { opacity: 0, transform: "translateY(50px)" },
+    config: {
+      tension: 350,
+      friction: 5,
+      duration: 1200,
+    },
+  });
   return (
     <Box
-      id="highlights"
       sx={{
+        width: "100%",
         pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },
         color: "white",
-        bgcolor: "grey.900",
+        paddingInline: { xs: 2, sm: 4, md: 10, lg: 16 },
+        textAlign: "start",
+        background: colors.highlight,
       }}
     >
-      <Container
-        sx={{
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: { xs: 3, sm: 6 },
-        }}
-      >
-        <Box
+      <animated.div style={smoothAnimation} ref={ref}>
+        <Typography
+          component="h2"
+          variant="h4"
+          gutterBottom
           sx={{
-            width: { sm: "100%", md: "60%" },
-            textAlign: { sm: "left", md: "center" },
+            fontSize: {
+              xs: "1.8em",
+              sm: "2.5em",
+              md: "3.2em",
+              lg: "4em",
+            },
           }}
         >
-          <Typography component="h2" variant="h4" gutterBottom>
-            Why US
-          </Typography>
-        </Box>
-        <Grid container spacing={2}>
+          Why US
+        </Typography>
+
+        <Grid container spacing={2} sx={{ mt: { xs: 2, md: 6 } }}>
           {items.map((item, index) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
               <Stack
                 direction="column"
-                component={Card}
                 spacing={1}
                 useFlexGap
                 sx={{
                   color: "inherit",
                   p: 3,
                   height: "100%",
-                  borderColor: "hsla(220, 25%, 25%, 0.3)",
-                  backgroundColor: "grey.800",
                 }}
               >
-                <Box sx={{ opacity: "50%" }}>{item.icon}</Box>
+                <Box sx={{ opacity: "100%" }}>{item.icon}</Box>
                 <div>
-                  <Typography gutterBottom sx={{ fontWeight: "medium" }}>
+                  <Typography
+                    gutterBottom
+                    sx={{
+                      fontWeight: 500,
+                      mb: { xs: 0.5, sm: 1, md: 2 }, // Reduced margin
+                      fontSize: {
+                        xs: "1.1em", // Adjusted for mobile
+                        sm: "1.26em", // Small screens
+                        md: "1.5em", // Medium screens
+                        lg: "1.8em", // Large screens
+                      },
+
+                      lineHeight: "1em",
+                      textAlign: "left",
+                    }}
+                  >
                     {item.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "grey.400" }}>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: "white",
+
+                      mb: { xs: 1, sm: 2, md: 3 }, // Reduced margin
+                      fontSize: { xs: "0.75em", sm: "0.85em", md: "1em" }, // Reduced font size
+                      fontWeight: 400,
+                      letterSpacing: "-0.02em",
+                      textAlign: "justify",
+                      textJustify: "inter-word",
+                    }}
+                  >
                     {item.description}
                   </Typography>
                 </div>
@@ -109,7 +150,7 @@ export default function Highlights() {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </animated.div>
     </Box>
   );
 }
