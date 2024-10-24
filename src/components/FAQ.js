@@ -7,6 +7,35 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useInView } from "react-intersection-observer";
 import { useSpring, animated } from "react-spring";
+import colors from "../assets/colors"; // Ensure colors object is updated accordingly
+
+const FAQs = [
+  {
+    question: "How can I schedule a CCTV installation service?",
+    answer:
+      "To schedule a CCTV installation, please call us at [phone number] or fill out the contact form on our website. Our team will get back to you shortly to confirm your appointment.",
+  },
+  {
+    question: "What are the costs associated with CCTV installation?",
+    answer:
+      "The cost of CCTV installation varies based on the number of cameras and the complexity of the setup. Please contact us for a detailed quote tailored to your specific requirements.",
+  },
+  {
+    question: "Do you offer maintenance services for installed CCTV systems?",
+    answer:
+      "Yes, we provide comprehensive maintenance services to ensure your CCTV systems operate efficiently. Regular check-ups can be scheduled to keep your equipment in optimal condition.",
+  },
+  {
+    question: "What warranty do you provide for your CCTV systems?",
+    answer:
+      "Our CCTV systems come with a [length of warranty] warranty that covers defects in materials and workmanship. For warranty claims, please contact our customer support.",
+  },
+  {
+    question: "Can I monitor the CCTV feed remotely?",
+    answer:
+      "Yes, our CCTV systems are equipped with remote monitoring capabilities. You can access the feed from your smartphone or computer, giving you peace of mind wherever you are.",
+  },
+];
 
 export default function FAQ() {
   const [expanded, setExpanded] = React.useState(false);
@@ -40,6 +69,7 @@ export default function FAQ() {
         pb: { xs: 8, sm: 16 },
         paddingInline: { xs: 2, sm: 4, md: 10, lg: 16 },
         textAlign: "start",
+        backgroundColor: "black", // Set background color to black
       }}
     >
       <animated.div style={smoothAnimation} ref={ref}>
@@ -47,15 +77,14 @@ export default function FAQ() {
           component="h2"
           variant="h4"
           sx={{
-            color: "text.primary",
             mb: 4,
             width: { sm: "100%", md: "60%" },
             textAlign: "start",
             fontSize: {
-              xs: "1.5em", // Reduced for mobile
-              sm: "2em", // Small screens
-              md: "2.5em", // Medium screens
-              lg: "3em", // Large screens
+              xs: "1.5em",
+              sm: "2em",
+              md: "2.5em",
+              lg: "3em",
             },
             lineHeight: "1.1em",
           }}
@@ -63,106 +92,44 @@ export default function FAQ() {
           Frequently Asked Questions
         </Typography>
         <Box sx={{ width: "100%" }}>
-          <Accordion
-            expanded={expanded === "panel1"}
-            onChange={handleChange("panel1")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1d-content"
-              id="panel1d-header"
+          {FAQs.map((faq, index) => (
+            <Accordion
+              key={index}
+              expanded={expanded === `panel${index + 1}`}
+              onChange={handleChange(`panel${index + 1}`)}
+              sx={{
+                border: `1px solid ${colors.divider}`,
+                "&:before": {
+                  display: "none",
+                },
+                backgroundColor: "black", // Accordion background
+              }}
             >
-              <Typography component="h3" variant="subtitle1">
-                How can I schedule a CCTV installation service?
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography
-                variant="subtitle1"
-                gutterBottom
-                sx={{ maxWidth: { sm: "100%", md: "90%" } }}
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon sx={{ color: colors.divider }} />}
+                aria-controls={`panel${index + 1}d-content`}
+                id={`panel${index + 1}d-header`}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "transparent",
+                  },
+                }}
               >
-                To schedule a CCTV installation, please call us at [phone
-                number] or fill out the contact form on our website. Our team
-                will get back to you shortly to confirm your appointment.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            expanded={expanded === "panel2"}
-            onChange={handleChange("panel2")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel2d-content"
-              id="panel2d-header"
-            >
-              <Typography component="h3" variant="subtitle1">
-                What are the costs associated with CCTV installation?
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography
-                variant="body2"
-                gutterBottom
-                sx={{ maxWidth: { sm: "100%", md: "90%" } }}
-              >
-                The cost of CCTV installation varies based on the number of
-                cameras and the complexity of the setup. Please contact us for a
-                detailed quote tailored to your specific requirements.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            expanded={expanded === "panel3"}
-            onChange={handleChange("panel3")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3d-content"
-              id="panel3d-header"
-            >
-              <Typography component="h3" variant="subtitle1">
-                Do you offer maintenance services for installed CCTV systems?
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography
-                variant="body2"
-                gutterBottom
-                sx={{ maxWidth: { sm: "100%", md: "90%" } }}
-              >
-                Yes, we provide comprehensive maintenance services to ensure
-                your CCTV systems operate efficiently. Regular check-ups can be
-                scheduled to keep your equipment in optimal condition.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            expanded={expanded === "panel4"}
-            onChange={handleChange("panel4")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel4d-content"
-              id="panel4d-header"
-            >
-              <Typography component="h3" variant="subtitle1">
-                What warranty do you provide for your CCTV systems?
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography
-                variant="body2"
-                gutterBottom
-                sx={{ maxWidth: { sm: "100%", md: "90%" } }}
-              >
-                Our CCTV systems come with a [length of warranty] warranty that
-                covers defects in materials and workmanship. For warranty
-                claims, please contact our customer support.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
+                <Typography component="h3" variant="subtitle1">
+                  {faq.question}
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography
+                  variant="body2"
+                  gutterBottom
+                  sx={{ maxWidth: { sm: "100%", md: "90%" } }}
+                >
+                  {faq.answer}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </Box>
       </animated.div>
     </Box>

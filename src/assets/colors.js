@@ -1,8 +1,9 @@
 const colors = {
   primary: "#10375C",
   secondary: "#024CAA",
-  highlight: "#EC8305",
+  highlight: "#9e3198",
   neutral: "#DBD3D3",
+  divider: "#ccd1d666",
 };
 
 export default colors;

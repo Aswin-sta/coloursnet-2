@@ -17,7 +17,6 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   height: "100%",
   backdropFilter: "blur(24px)",
   boxSizing: "border-box",
-  borderColor: (theme.vars || theme).palette.divider,
   backgroundColor: colors.primary,
   boxShadow: (theme.vars || theme).shadows[1],
   padding: "8px 25px",
@@ -68,7 +67,7 @@ export default function AppAppBar() {
                 sx={{
                   fontFamily: "'Roboto', sans-serif",
                   color: "white",
-                  letterSpacing: "0.3em",
+                  letterSpacing: { xs: 0, md: "0.2em" },
                 }}
               >
                 Security Solutions

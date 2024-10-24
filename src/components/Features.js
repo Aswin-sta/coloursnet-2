@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { Typography, useMediaQuery } from "@mui/material";
 import assets from "../assets/images";
 import { useInView } from "react-intersection-observer";
+import colors from "../assets/colors";
 
 export default function Features() {
   const services = [
@@ -36,7 +37,14 @@ export default function Features() {
       image: assets.images.cctv5,
     },
     {
-      id: "5",
+      id: "5", // New ID for Alarm Systems
+      name: "Alarm Systems",
+      description:
+        "Comprehensive alarm systems for enhanced security and peace of mind.",
+      image: assets.images.alarmSystem, // Ensure you have the image reference in your assets
+    },
+    {
+      id: "6",
       name: "Software Solutions",
       description:
         "Custom software solutions tailored to meet your business needs.",
@@ -56,6 +64,17 @@ export default function Features() {
     threshold: 0.1,
   });
 
+  React.useEffect(() => {
+    const preloadImages = () => {
+      services.forEach((service) => {
+        const img = new Image();
+        img.src = service.image;
+      });
+    };
+
+    preloadImages();
+  }, []);
+
   // Animation for the list
   const smoothAnimation = useSpring({
     from: { opacity: 0, transform: "translateY(50px)" },
@@ -69,11 +88,15 @@ export default function Features() {
     },
   });
 
-  // Animation for image fade and scale
   const imageAnimation = useSpring({
     opacity: selectedService ? 1 : 0,
     transform: selectedService ? "scale(1)" : "scale(0.8)",
-    config: { duration: 800 },
+    config: {
+      tension: 200,
+      friction: 15,
+      mass: 1,
+      duration: isSmallScreen ? 1500 : 800,
+    },
   });
 
   return (
@@ -107,8 +130,7 @@ export default function Features() {
         <Grid
           container
           sx={{
-            border: (theme) =>
-              `1px solid ${(theme.vars || theme).palette.divider}`,
+            border: `1px solid ${colors.divider}`,
             borderRadius: { xs: "20px", sm: "30px", md: "50px", lg: "70px" },
             overflow: "hidden",
           }}
@@ -119,6 +141,8 @@ export default function Features() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
+              boxSizing: "border-box",
+              overflow: "hidden",
             }}
           >
             <Box sx={{ flex: 1, boxSizing: "border-box" }}>
@@ -128,8 +152,7 @@ export default function Features() {
                   onClick={() => handleServiceClick(service)}
                   sx={(theme) => ({
                     cursor: "pointer",
-                    borderBottom: (theme) =>
-                      `1px solid ${(theme.vars || theme).palette.divider}`,
+                    borderBottom: `1px solid ${colors.divider}`,
                     "&:last-child": {
                       borderBottom: "none",
                     },
@@ -237,8 +260,7 @@ export default function Features() {
               justifyContent: "center",
               alignItems: "center",
               padding: 4,
-              borderLeft: (theme) =>
-                `1px solid ${(theme.vars || theme).palette.divider}`,
+              borderLeft: `1px solid ${colors.divider}`,
             }}
           >
             <Box

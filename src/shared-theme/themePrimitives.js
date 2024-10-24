@@ -1,8 +1,6 @@
-import { createTheme, alpha } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 const defaultTheme = createTheme();
-
-const customShadows = [...defaultTheme.shadows];
 
 export const brand = {
   50: "hsl(210, 100%, 95%)",
@@ -67,29 +65,6 @@ export const red = {
   700: "hsl(0, 94%, 18%)",
   800: "hsl(0, 95%, 12%)",
   900: "hsl(0, 93%, 6%)",
-};
-
-export const colorSchemes = {
-  light: {
-    palette: {
-      divider: alpha(gray[300], 0.4),
-      background: {
-        default: "rgb(253, 251, 244)",
-        paper: "hsl(220, 35%, 97%)",
-      },
-      text: {
-        primary: gray[800],
-        secondary: gray[600],
-        warning: orange[400],
-      },
-      action: {
-        hover: alpha(gray[200], 0.2),
-        selected: `${alpha(gray[200], 0.3)}`,
-      },
-      baseShadow:
-        "hsla(220, 30%, 5%, 0.07) 0px 4px 16px 0px, hsla(220, 25%, 10%, 0.07) 0px 8px 16px -5px",
-    },
-  },
 };
 
 export const typography = {

@@ -74,10 +74,9 @@ export default function Highlights() {
         width: "100%",
         pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },
-        color: "white",
         paddingInline: { xs: 2, sm: 4, md: 10, lg: 16 },
         textAlign: "start",
-        background: colors.highlight,
+        background: colors.primary,
       }}
     >
       <animated.div style={smoothAnimation} ref={ref}>
@@ -99,7 +98,14 @@ export default function Highlights() {
 
         <Grid container spacing={2} sx={{ mt: { xs: 2, md: 6 } }}>
           {items.map((item, index) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+            <Grid
+              size={{
+                xs: 12,
+                sm: 6,
+                md: 4,
+              }}
+              key={index}
+            >
               <Stack
                 direction="column"
                 spacing={1}
@@ -107,6 +113,15 @@ export default function Highlights() {
                 sx={{
                   color: "inherit",
                   p: 3,
+                  border: {
+                    xs: "none",
+                    md: `1px solid${colors.divider}`,
+                  },
+                  borderRadius: {
+                    xs: "20px",
+                    aspectRatio: { xs: "none", md: 16 / 9 },
+                    md: "30px",
+                  },
                   height: "100%",
                 }}
               >
@@ -133,8 +148,6 @@ export default function Highlights() {
                   <Typography
                     variant="body2"
                     sx={{
-                      color: "white",
-
                       mb: { xs: 1, sm: 2, md: 3 }, // Reduced margin
                       fontSize: { xs: "0.75em", sm: "0.85em", md: "1em" }, // Reduced font size
                       fontWeight: 400,
