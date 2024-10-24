@@ -27,20 +27,20 @@ export default function Features() {
       name: "Home Automation",
       description:
         "Integrate smart devices for a seamless home automation experience.",
-      image: "https://images.unsplash.com/photo-1575315081344-baa44c7bc70a",
+      image: assets.images.cctv3,
     },
     {
       id: "4",
       name: "Networking and Ethernet",
       description: "Setup and maintenance of reliable networking solutions.",
-      image: "https://images.unsplash.com/photo-1571136808655-6f1e49c53b73",
+      image: assets.images.cctv5,
     },
     {
       id: "5",
       name: "Software Solutions",
       description:
         "Custom software solutions tailored to meet your business needs.",
-      image: "https://images.unsplash.com/photo-1505420488437-4852f29b83b2",
+      image: assets.images.cctv4,
     },
   ];
 
@@ -52,10 +52,11 @@ export default function Features() {
   };
 
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation triggers only once when in view
-    threshold: 0.1, // Adjust the threshold for triggering
+    triggerOnce: true,
+    threshold: 0.1,
   });
-  // Define smoother animation using react-spring
+
+  // Animation for the list
   const smoothAnimation = useSpring({
     from: { opacity: 0, transform: "translateY(50px)" },
     to: inView
@@ -67,10 +68,12 @@ export default function Features() {
       duration: 1200,
     },
   });
-  // Add image-specific fade-in animation
+
+  // Animation for image fade and scale
   const imageAnimation = useSpring({
     opacity: selectedService ? 1 : 0,
-    config: { duration: 800 }, // Duration of fade-in for the image
+    transform: selectedService ? "scale(1)" : "scale(0.8)",
+    config: { duration: 800 },
   });
 
   return (
@@ -88,15 +91,14 @@ export default function Features() {
           align="left"
           gutterBottom
           sx={{
-            mb: { xs: 4, sm: 5, md: 6 }, // Reduced margin
-            mt: { xs: 4, sm: 5, md: 6 }, // Reduced margin
+            mb: { xs: 4, sm: 5, md: 6 },
+            mt: { xs: 4, sm: 5, md: 6 },
             fontSize: {
-              xs: "1.5em", // Reduced for mobile
-              sm: "2em", // Small screens
-              md: "2.5em", // Medium screens
-              lg: "3em", // Large screens
+              xs: "1.5em",
+              sm: "2em",
+              md: "2.5em",
+              lg: "3em",
             },
-
             lineHeight: "1.1em",
           }}
         >
@@ -148,21 +150,20 @@ export default function Features() {
                     paddingInline: { xs: 2, sm: 4, md: 6 },
                     paddingBlock: { xs: 2, sm: 3, md: 4 },
                     transition:
-                      "background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out", // Smooth transition
+                      "background-color 0.3s ease-in-out, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
                   })}
                 >
                   <Typography
                     variant="h6"
                     sx={{
                       fontWeight: 500,
-                      mb: { xs: 0.5, sm: 1, md: 2 }, // Reduced margin
+                      mb: { xs: 0.5, sm: 1, md: 2 },
                       fontSize: {
-                        xs: "1.1em", // Adjusted for mobile
-                        sm: "1.26em", // Small screens
-                        md: "1.5em", // Medium screens
-                        lg: "1.8em", // Large screens
+                        xs: "1.1em",
+                        sm: "1.26em",
+                        md: "1.5em",
+                        lg: "1.8em",
                       },
-
                       lineHeight: "1em",
                       textAlign: "left",
                     }}
@@ -174,15 +175,15 @@ export default function Features() {
                       maxHeight:
                         selectedService.id === service.id ? "100px" : 0,
                       overflow: "hidden",
-                      transition: "max-height 0.8s ease, padding 0.5s ease", // Smoother transition
-                      paddingTop: selectedService.id === service.id ? 1 : 0, // Reduced padding
+                      transition: "max-height 0.8s ease, padding 0.5s ease",
+                      paddingTop: selectedService.id === service.id ? 1 : 0,
                     }}
                   >
                     <Typography
                       variant="body1"
                       sx={{
-                        mb: { xs: 1, sm: 2, md: 3 }, // Reduced margin
-                        fontSize: { xs: "0.75em", sm: "0.85em", md: "0.95em" }, // Reduced font size
+                        mb: { xs: 1, sm: 2, md: 3 },
+                        fontSize: { xs: "0.75em", sm: "0.85em", md: "0.95em" },
                         fontWeight: 400,
                         letterSpacing: "-0.02em",
                         textAlign: "justify",
@@ -209,23 +210,17 @@ export default function Features() {
                           height: "auto",
                         }}
                       >
-                        <Box
-                          component="img"
+                        <animated.img
                           src={selectedService.image}
                           alt={selectedService.name}
                           key={selectedService.id}
-                          sx={{
+                          style={{
+                            ...imageAnimation,
                             aspectRatio: "1/1",
                             width: "100%",
                             height: "auto",
                             objectFit: "cover",
                             borderRadius: "inherit",
-                            opacity: 1,
-                            transition: "opacity 0.8s ease, filter 0.8s ease", // Smoother transition for opacity and blur
-                            filter: "blur(0px)",
-                            "&:hover": {
-                              filter: "blur(0px)",
-                            },
                           }}
                         />
                       </Box>
@@ -264,13 +259,12 @@ export default function Features() {
                 alt={selectedService.name}
                 key={selectedService.id}
                 style={{
-                  ...imageAnimation, // Spread the animation styles
+                  ...imageAnimation,
                   aspectRatio: "1/1",
                   width: "100%",
                   height: "auto",
                   objectFit: "cover",
                   borderRadius: "inherit",
-                  opacity: 1,
                 }}
               />
             </Box>

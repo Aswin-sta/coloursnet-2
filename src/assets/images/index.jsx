@@ -1,5 +1,8 @@
 import cctv1 from "./cctv1.jpeg";
 import cctv2 from "./cctv2.jpeg";
+import cctv3 from "./cctv3.jpg";
+import cctv4 from "./cctv4.jpg";
+import cctv5 from "./cctv5.jpg";
 import alarmLogo from "./alarm-logo.png";
 import americanDynamicsLogo from "./americandynamics-logo.png";
 import axisLogo from "./axis-logo-200.png";
@@ -19,6 +22,9 @@ const assets = {
   images: {
     cctv1: cctv1,
     cctv2: cctv2,
+    cctv3: cctv3,
+    cctv4: cctv4,
+    cctv5: cctv5,
     AlarmLogo: alarmLogo,
     AmericanDynamicsLogo: americanDynamicsLogo,
     AxisLogo: axisLogo,
