@@ -64,17 +64,6 @@ export default function Features() {
     threshold: 0.1,
   });
 
-  React.useEffect(() => {
-    const preloadImages = () => {
-      services.forEach((service) => {
-        const img = new Image();
-        img.src = service.image;
-      });
-    };
-
-    preloadImages();
-  }, []);
-
   // Animation for the list
   const smoothAnimation = useSpring({
     from: { opacity: 0, transform: "translateY(50px)" },
@@ -92,10 +81,9 @@ export default function Features() {
     opacity: selectedService ? 1 : 0,
     transform: selectedService ? "scale(1)" : "scale(0.8)",
     config: {
-      tension: 200,
-      friction: 15,
-      mass: 1,
-      duration: isSmallScreen ? 1500 : 800,
+      tension: 350,
+      friction: 5,
+      duration: isSmallScreen ? 1200 : 800,
     },
   });
 
